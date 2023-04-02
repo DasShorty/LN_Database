@@ -1,2 +1,2 @@
-rootProject.name = "mysql-api"
+rootProject.name = "database"
 
