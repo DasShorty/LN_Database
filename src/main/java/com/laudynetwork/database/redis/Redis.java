@@ -8,7 +8,7 @@ import lombok.Getter;
 public class Redis {
 
     @Getter
-    private final StatefulRedisConnection<String, String> connection;
+    public final StatefulRedisConnection<String, String> connection;
     private final RedisClient client;
 
     public Redis() {
