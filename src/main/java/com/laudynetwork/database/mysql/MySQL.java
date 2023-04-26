@@ -28,11 +28,6 @@ public class MySQL {
         this.db = db;
     }
 
-    // Setter / Getter
-    public void setDebug(boolean debug) {
-        this.debug = debug;
-    }
-
     public void setHost(String host) {
         this.host = host;
     }
@@ -55,6 +50,11 @@ public class MySQL {
 
     public boolean isDebug() {
         return debug;
+    }
+
+    // Setter / Getter
+    public void setDebug(boolean debug) {
+        this.debug = debug;
     }
 
     // Connection
