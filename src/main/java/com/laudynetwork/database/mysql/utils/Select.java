@@ -18,8 +18,16 @@ public class Select {
         return filter;
     }
 
+    public void setFilter(String filter) {
+        this.filter = filter;
+    }
+
     public String getTable() {
         return table;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
     }
 
     public String getColumns() {
@@ -28,14 +36,6 @@ public class Select {
         } else {
             return columns;
         }
-    }
-
-    public void setFilter(String filter) {
-        this.filter = filter;
-    }
-
-    public void setTable(String table) {
-        this.table = table;
     }
 
     public void setColumns(String columns) {

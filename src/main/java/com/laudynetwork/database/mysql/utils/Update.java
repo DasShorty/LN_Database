@@ -14,27 +14,27 @@ public class Update {
         this.filter = filter;
     }
 
-    public void setTable(String table) {
-        this.table = table;
-    }
-
-    public void setFilter(String filter) {
-        this.filter = filter;
-    }
-
-    public void setValue(UpdateValue value) {
-        this.value = value;
-    }
-
     public String getTable() {
         return table;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
     }
 
     public String getFilter() {
         return filter;
     }
 
+    public void setFilter(String filter) {
+        this.filter = filter;
+    }
+
     public UpdateValue getValue() {
         return value;
+    }
+
+    public void setValue(UpdateValue value) {
+        this.value = value;
     }
 }

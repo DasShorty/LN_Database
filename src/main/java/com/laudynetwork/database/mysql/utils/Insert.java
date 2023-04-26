@@ -16,8 +16,24 @@ public class Insert {
     public Insert() {
     }
 
+    public String getColumns() {
+        return columns;
+    }
+
     public void setColumns(String columns) {
         this.columns = columns;
+    }
+
+    public String getTable() {
+        return table;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
+    }
+
+    public Object[] getData() {
+        return data;
     }
 
     public void setData(String... data) {
@@ -26,21 +42,5 @@ public class Insert {
 
     public void setData(List<Object> data) {
         this.data = data.toArray();
-    }
-
-    public void setTable(String table) {
-        this.table = table;
-    }
-
-    public String getColumns() {
-        return columns;
-    }
-
-    public String getTable() {
-        return table;
-    }
-
-    public Object[] getData() {
-        return data;
     }
 }
