@@ -281,7 +281,7 @@ public class MySQL {
                 boolean bound = true;
                 while (bound) {
                     try {
-                        row.addcolumn(resmeta.getColumnName(i), res.getObject(i));
+                        row.addColumn(resmeta.getColumnName(i), res.getObject(i));
                     } catch (SQLException e) {
                         bound = false;
                     }
@@ -332,7 +332,7 @@ public class MySQL {
                 boolean bound = true;
                 while (bound) {
                     try {
-                        row.addcolumn(resmeta.getColumnName(i), res.getObject(i));
+                        row.addColumn(resmeta.getColumnName(i), res.getObject(i));
                     } catch (SQLException e) {
                         bound = false;
                     }
