@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class UpdateValue {
-    private HashMap<String, Object> data = new HashMap<>();
+    private final HashMap<String, Object> data = new HashMap<>();
 
     public UpdateValue(String val1, Object val2) {
         data.put(val1, val2);
