@@ -9,7 +9,7 @@ public class Row {
     public Row() {
     }
 
-    public void addcolumn(String name, Object content) {
+    public void addColumn(String name, Object content) {
         this.content.put(name, content);
     }
 
