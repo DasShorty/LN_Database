@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class Row {
-    private HashMap<String, Object> content = new HashMap<>();
+    private final HashMap<String, Object> content = new HashMap<>();
 
     public Row() {
     }
