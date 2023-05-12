@@ -2,104 +2,35 @@ package com.laudynetwork.database.mysql;
 
 import com.laudynetwork.database.mysql.utils.*;
 import com.mysql.cj.jdbc.MysqlDataSource;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.SneakyThrows;
+import lombok.val;
 
 import java.sql.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class MySQL {
+    private final MysqlDataSource dataSource;
 
-    // Vars
-    private String host, user, password, db;
-    private int port = 3306;
-    private Connection con;
-    private boolean debug = false;
-
-    // Inits
-    public MySQL() {
-    }
-
-    public MySQL(String host) {
-        this.host = host;
-    }
-
+    @SneakyThrows
     public MySQL(String host, String user, String pw, String db) {
-        this.host = host;
-        this.user = user;
-        this.password = pw;
-        this.db = db;
+        this.dataSource = new MysqlDataSource();
+
+        this.dataSource.setServerName(host);
+        this.dataSource.setPort(3306); // preset port | removed variable
+        this.dataSource.setDatabaseName(db);
+        this.dataSource.setUser(user);
+        this.dataSource.setPassword(pw);
+        this.dataSource.setAllowMultiQueries(true);
+        System.out.println("Connection ready to create");
+
     }
 
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setDb(String db) {
-        this.db = db;
-    }
-
-    public boolean isDebug() {
-        return debug;
-    }
-
-    // Setter / Getter
-    public void setDebug(boolean debug) {
-        this.debug = debug;
-    }
-
-    // Connection
-    public boolean connect() {
-        try {
-            MysqlDataSource dataSource = new MysqlDataSource();
-            if (debug) System.out.println("MysqlDataSource implements the javax.sql.DataSource interface");
-
-            dataSource.setServerName(host);
-            dataSource.setPort(port);
-            dataSource.setDatabaseName(db);
-            dataSource.setUser(user);
-            dataSource.setPassword(password);
-            dataSource.setAllowMultiQueries(true);
-            con = dataSource.getConnection();
-            System.out.println("Connection established");
-            return true;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean isConnected() {
-        if (con == null) {
-            return false;
-        }
-        try {
-            if (con.isClosed()) {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean close() {
-        try {
-            con.close();
-            return true;
-        } catch (SQLException e) {
-            return false;
-        }
+    @SneakyThrows
+    public Connection createConnection() {
+        return this.dataSource.getConnection();
     }
 
     // Database Interaction
@@ -122,7 +53,7 @@ public class MySQL {
         String sql = "INSERT INTO " + table + " (" + columns + ") VALUES (" + sqldata + ");";
         Statement stmt = null;
         try {
-            stmt = con.createStatement();
+            stmt = this.createConnection().createStatement();
             stmt.execute(sql);
 
         } catch (SQLException e) {
@@ -164,7 +95,7 @@ public class MySQL {
         }
         Statement stmt = null;
         try {
-            stmt = con.createStatement();
+            stmt = this.createConnection().createStatement();
             stmt.execute(sql);
 
         } catch (SQLException e) {
@@ -201,7 +132,7 @@ public class MySQL {
             String sql = "UPDATE " + table + " SET " + change + " WHERE " + filter + ";";
             Statement stmt = null;
             try {
-                stmt = con.createStatement();
+                stmt = this.createConnection().createStatement();
                 stmt.execute(sql);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -241,7 +172,7 @@ public class MySQL {
         }
         Statement stmt = null;
         try {
-            stmt = con.createStatement();
+            stmt = this.createConnection().createStatement();
             stmt.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -271,7 +202,7 @@ public class MySQL {
         Statement stmt;
         ResultSet res;
         try {
-            stmt = con.createStatement();
+            stmt = this.createConnection().createStatement();
             res = stmt.executeQuery(sql);
             ResultSetMetaData resmeta = res.getMetaData();
             Result result = new Result();
@@ -322,7 +253,7 @@ public class MySQL {
         Statement stmt;
         ResultSet res;
         try {
-            stmt = con.createStatement();
+            stmt = this.createConnection().createStatement();
             res = stmt.executeQuery(sql);
             ResultSetMetaData resmeta = res.getMetaData();
             Result result = new Result();
@@ -350,7 +281,7 @@ public class MySQL {
     public boolean custom(String sql) {
         Statement stmt = null;
         try {
-            stmt = con.createStatement();
+            stmt = this.createConnection().createStatement();
             stmt.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
