@@ -2,14 +2,9 @@ package com.laudynetwork.database.mysql;
 
 import com.laudynetwork.database.mysql.utils.*;
 import com.mysql.cj.jdbc.MysqlDataSource;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
-import lombok.val;
 
 import java.sql.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class MySQL {
     private final MysqlDataSource dataSource;
@@ -221,6 +216,9 @@ public class MySQL {
                 }
                 result.addrow(row);
             }
+
+            stmt.close();
+
             return result;
 
         } catch (SQLException e) {
@@ -271,6 +269,8 @@ public class MySQL {
                 }
                 result.addrow(row);
             }
+
+            stmt.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
