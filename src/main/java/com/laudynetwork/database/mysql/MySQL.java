@@ -40,6 +40,8 @@ public class MySQL {
 
     @SneakyThrows
     private boolean isConnectionReady() {
+        if (this.connection == null)
+            return false;
         return !this.connection.isClosed();
     }
 
