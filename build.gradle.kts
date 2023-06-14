@@ -33,7 +33,6 @@ repositories {
 }
 
 dependencies {
-    // testbuild
     implementation("mysql:mysql-connector-java:8.0.33")
     annotationProcessor("org.projectlombok:lombok:1.18.28")
     implementation("biz.paluch.redis:lettuce:4.5.0.Final")
