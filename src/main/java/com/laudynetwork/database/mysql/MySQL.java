@@ -9,7 +9,6 @@ import java.sql.*;
 
 public class MySQL {
     private final MysqlDataSource dataSource;
-    private Connection connection;
 
     @SneakyThrows
     public MySQL(String host, String user, String pw, String db) {
@@ -26,23 +25,12 @@ public class MySQL {
     }
 
     public Connection checkConnectOrCreateNew() {
-        if (this.isConnectionReady()) {
-            return this.connection;
-        }
-        this.connection = this.createConnection();
-        return this.connection;
+        return this.createConnection();
     }
 
     @SneakyThrows
     private Connection createConnection() {
         return this.dataSource.getConnection();
-    }
-
-    @SneakyThrows
-    private boolean isConnectionReady() {
-        if (this.connection == null)
-            return false;
-        return !this.connection.isClosed();
     }
 
     // Database Interaction
