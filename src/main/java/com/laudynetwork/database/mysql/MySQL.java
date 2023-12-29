@@ -15,7 +15,7 @@ public class MySQL {
         this.dataSource = new MysqlDataSource();
 
         this.dataSource.setServerName(host);
-        this.dataSource.setPort(3306); // preset port | removed variable
+        this.dataSource.setPort(3306);
         this.dataSource.setDatabaseName(db);
         this.dataSource.setUser(user);
         this.dataSource.setPassword(pw);
